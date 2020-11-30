@@ -3,7 +3,7 @@
 ![Shard CI](https://github.com/stephendolan/pundit/workflows/Shard%20CI/badge.svg)
 [![API Documentation Website](https://img.shields.io/website?down_color=red&down_message=Offline&label=API%20Documentation&up_message=Online&url=https%3A%2F%2Fstephendolan.github.io%2Fpundit%2F)](https://stephendolan.github.io/pundit)
 
-TODO: Write a description here
+A simple Crystal shard for managing authorization in [Lucky](https://luckyframework.org) applications.
 
 ## Installation
 
@@ -24,10 +24,6 @@ require "pundit"
 ```
 
 TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
 
 ## Contributing
 
