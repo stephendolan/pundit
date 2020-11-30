@@ -1,6 +1,6 @@
 name: pundit
 description: A simple authorization library for Lucky Crystal apps
-version: 0.1.0
+version: 0.2.0
 
 authors:
   - Stephen Dolan <stephen@stephencodes.com>
