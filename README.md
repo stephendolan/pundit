@@ -9,11 +9,11 @@ TODO: Write a description here
 
 1. Add the dependency to your `shard.yml`:
 
-   ```yaml
-   dependencies:
-     pundit:
-       github: stephendolan/pundit
-   ```
+```yaml
+dependencies:
+  pundit:
+    github: stephendolan/pundit
+```
 
 2. Run `shards install`
 
