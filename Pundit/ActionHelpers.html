@@ -8,8 +8,8 @@
 <meta name="crystal_docs.project_name" content="pundit">
 
 
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/doc.js"></script>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
 
 <svg class="hidden">
   <symbol id="octicon-link" viewBox="0 0 16 16">
@@ -18,9 +18,9 @@
 </svg>
 
   <meta id="repository-name" content="pundit">
-  <title>Pundit - pundit main</title>
+  <title>Pundit::ActionHelpers - pundit main</title>
   <script type="text/javascript">
-    CrystalDocs.base_path = "";
+    CrystalDocs.base_path = "../";
   </script>
 </head>
 <body>
@@ -33,7 +33,7 @@
 
     <div class="project-summary">
       <h1 class="project-name">
-        <a href="index.html">
+        <a href="../index.html">
           pundit
         </a>
       </h1>
@@ -52,12 +52,12 @@
     <ul>
   
   <li class="parent open current" data-id="pundit/Pundit" data-name="pundit">
-      <a href="Pundit.html">Pundit</a>
+      <a href="../Pundit.html">Pundit</a>
       
         <ul>
   
-  <li class=" " data-id="pundit/Pundit/ActionHelpers" data-name="pundit::actionhelpers">
-      <a href="Pundit/ActionHelpers.html">ActionHelpers</a>
+  <li class=" current" data-id="pundit/Pundit/ActionHelpers" data-name="pundit::actionhelpers">
+      <a href="../Pundit/ActionHelpers.html">ActionHelpers</a>
       
     </li>
   
@@ -75,24 +75,13 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Pundit
+  <span class="kind">module</span> Pundit::ActionHelpers
 
 </h1>
 
 
 
 
-
-  <h2>
-    <a id="overview" class="anchor" href="#overview">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Overview
-  </h2>
-
-  <p>Module for handling authorization</p>
 
 
 
@@ -117,47 +106,14 @@
   </h2>
   
     
-      <a href="https://github.com/stephendolan/pundit/blob/f11fb556377e280aab2a5972e219b39921d1c8c0/src/pundit.cr#L4" target="_blank">
-        pundit.cr
-      </a>
-    
-    <br/>
-  
-    
       <a href="https://github.com/stephendolan/pundit/blob/f11fb556377e280aab2a5972e219b39921d1c8c0/src/pundit/action_helpers.cr#L1" target="_blank">
         pundit/action_helpers.cr
       </a>
     
     <br/>
   
-    
-      <a href="https://github.com/stephendolan/pundit/blob/f11fb556377e280aab2a5972e219b39921d1c8c0/src/pundit/version.cr#L1" target="_blank">
-        pundit/version.cr
-      </a>
-    
-    <br/>
-  
 
 
-
-  
-    <h2>
-      <a id="constant-summary" class="anchor" href="#constant-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-      Constant Summary
-    </h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="VERSION">
-        <strong>VERSION</strong> = <code><span class="s">&quot;0.1.0&quot;</span></code>
-      </dt>
-      
-    
-  </dl>
 
 
 
@@ -176,13 +132,30 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#do_something-instance-method" class="signature"><strong>#do_something</strong></a>
+        <a href="#current_user:T?-instance-method" class="signature"><strong>#current_user</strong> : T?</a>
         
       </li>
     
   </ul>
 
 
+
+  <h2>
+    <a id="macro-summary" class="anchor" href="#macro-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#authorize(policy_class_override=nil,method_name_override=nil)-macro" class="signature"><strong>authorize</strong>(policy_class_override = <span class="n">nil</span>, method_name_override = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -204,24 +177,50 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="do_something-instance-method">
+    <div class="entry-detail" id="current_user:T?-instance-method">
       <div class="signature">
-        
-        def <strong>do_something</strong>
+        abstract 
+        def <strong>current_user</strong> : T?
 
-        <a class="method-permalink" href="#do_something-instance-method">#</a>
+        <a class="method-permalink" href="#current_user:T?-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/f11fb556377e280aab2a5972e219b39921d1c8c0/src/pundit/version.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/f11fb556377e280aab2a5972e219b39921d1c8c0/src/pundit/action_helpers.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+
+  <h2>
+    <a id="macro-detail" class="anchor" href="#macro-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Detail
+  </h2>
+  
+    <div class="entry-detail" id="authorize(policy_class_override=nil,method_name_override=nil)-macro">
+      <div class="signature">
+        
+        macro <strong>authorize</strong>(policy_class_override = <span class="n">nil</span>, method_name_override = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#authorize(policy_class_override=nil,method_name_override=nil)-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/f11fb556377e280aab2a5972e219b39921d1c8c0/src/pundit/action_helpers.cr#L2" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 </div>
