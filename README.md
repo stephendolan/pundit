@@ -1,5 +1,7 @@
 # Pundit
 
+![Shard CI](https://github.com/stephendolan/pundit/workflows/Shard%20CI/badge.svg)
+
 TODO: Write a description here
 
 ## Installation
