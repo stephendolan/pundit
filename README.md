@@ -35,6 +35,10 @@ A simple Crystal shard for managing authorization in [Lucky](https://luckyframew
 
 ## Usage in Lucky
 
+### Creating policies
+
+TODO: Document what a policy is, and how to create a new one using the built-in tasks (TBD)
+
 ### Authorizing actions
 
 Let's say we have a `Books::Index` action that looks like this:
@@ -86,6 +90,10 @@ def render
   end
 end
 ```
+
+### Overriding defaults
+
+TODO: Need to document a Lucky task or something to generate the default ApplicationPolicy, and explain how to override
 
 ## Contributing
 
