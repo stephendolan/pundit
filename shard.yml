@@ -1,0 +1,9 @@
+name: pundit
+version: 0.1.0
+
+authors:
+  - Stephen Dolan <stephen@stephencodes.com>
+
+crystal: 0.35.1
+
+license: MIT
