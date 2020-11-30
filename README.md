@@ -143,6 +143,35 @@ end
 
 TODO: Need to document a Lucky task or something to generate the default ApplicationPolicy, and explain how to override
 
+### Handling authorization errors
+
+If a call to `authorize` fails, a `Pundit::NotAuthorizedError` will be raised.
+
+You can handle this elegantly by adding an overloaded `render` method to your `src/actions/errors/show.cr` action:
+
+```crystal
+# This class handles error responses and reporting.
+#
+# https://luckyframework.org/guides/http-and-routing/error-handling
+class Errors::Show < Lucky::ErrorAction
+  DEFAULT_MESSAGE = "Something went wrong."
+  default_format :html
+
+  # Capture Pundit authorization exceptions to handle it elegantly
+  def render(error : Pundit::NotAuthorizedError)
+    if html?
+      # We might want to throw an appropriate status and message
+      error_html "Sorry, you're not authorized to access that", status: 401
+
+      # Or maybe we just redirect users back to the previous page
+      # redirect_back fallback: Home::Index
+    else
+      error_json "Not authorized", status: 401
+    end
+  end
+end
+```
+
 ## Contributing
 
 1. Fork it (<https://github.com/stephendolan/pundit/fork>)
