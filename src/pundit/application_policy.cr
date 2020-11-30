@@ -1,7 +1,8 @@
-abstract class ApplicationPolicy
+abstract class ApplicationPolicy(T)
   getter user
+  getter record
 
-  def initialize(@user : User)
+  def initialize(@user : User, @record : T? = nil)
   end
 
   def index?
