@@ -14,7 +14,7 @@ module Pundit::ActionHelpers
       {% method_name = method_name_override.id %}
     {% end %}
 
-    policy_class.new(current_user).{{ method_name }}
+    policy_class.new(current_user).{{ method_name }} || raise Pundit::NotAuthorizedError.new
   end
 
   abstract def current_user : T?
