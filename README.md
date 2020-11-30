@@ -37,7 +37,29 @@ A simple Crystal shard for managing authorization in [Lucky](https://luckyframew
 
 ### Creating policies
 
-TODO: Document what a policy is, and how to create a new one using the built-in tasks (TBD)
+Your policies must inherit from the provided [`ApplicationPolicy(T)`](src/pundit/application_policy.cr) abstract class, where `T` is the model you are authorizing against.
+
+For example, a `BookPolicy` may look like this:
+
+```crystal
+class BookPolicy < ApplicationPolicy(Book)
+  def index?
+    true
+  end
+end
+```
+
+The following methods are provided in [`ApplicationPolicy`](src/pundit/application_policy.cr):
+
+| Method Name | Default Value |
+| ----------- | ------------- |
+| `index?`    | `false`       |
+| `show?`     | `false`       |
+| `create?`   | `false`       |
+| `new?`      | `create?`     |
+| `update?`   | `false`       |
+| `edit?`     | `update?`     |
+| `delete?`   | `false`       |
 
 ### Authorizing actions
 
@@ -46,7 +68,7 @@ Let's say we have a `Books::Index` action that looks like this:
 ```crystal
 class Books::Index < BrowserAction
   get "/books/index" do
-    html IndexPage, books: BooksQuery.new
+    html IndexPage, books: BookQuery.new
   end
 end
 ```
@@ -58,17 +80,43 @@ class Books::Index < BrowserAction
   get "/books/index" do
     authorize
 
-    html IndexPage, books: BooksQuery.new
+    html IndexPage, books: BookQuery.new
   end
 end
 ```
 
-Behind the scenes, this is using the action's class name to check whether the `BooksPolicy`'s `index?` method is permitted for `current_user`. If the call fails, a `Pundit::NotAuthorizedError` is raised with a `401` HTTP status.
+Behind the scenes, this is using the action's class name to check whether the `BookPolicy`'s `index?` method is permitted for `current_user`. If the call fails, a `Pundit::NotAuthorizedError` is raised with a `401` HTTP status.
 
 The `authorize` call above is identical to writing this:
 
 ```crystal
-BooksPolicy.new(current_user).index? || raise Pundit::NotAuthorizedError.new
+BookPolicy.new(current_user).index? || raise Pundit::NotAuthorizedError.new
+```
+
+You can also leverage specific records in your authorization. For example, say we have a `Books::Update` action that looks like this:
+
+```crystal
+post "/books/:book_id/update" do
+  book = BookQuery.find(book_id)
+
+  SaveBook.update(book, params) do |operation, book|
+    redirect Home::Index
+  end
+end
+```
+
+We can add an `authorize` call to check whether or not the user is permitted to update this specific book like this:
+
+```crystal
+post "/books/:book_id/update" do
+  book = BookQuery.find(book_id)
+
+  authorize(book)
+
+  SaveBook.update(book, params) do |operation, book|
+    redirect Home::Index
+  end
+end
 ```
 
 ### Authorizing views
@@ -85,7 +133,7 @@ To ensure that the `current_user` is permitted to create a new book before showi
 
 ```crystal
 def render
-  if BooksPolicy.new(current_user).create?
+  if BookPolicy.new(current_user).create?
     button "Create new book"
   end
 end
