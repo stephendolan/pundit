@@ -1,6 +1,5 @@
-# TODO: Write documentation for `Pundit`
-module Pundit
-  VERSION = "0.1.0"
+require "./pundit/*"
 
-  # TODO: Put your code here
+# Module for handling authorization
+module Pundit
 end
