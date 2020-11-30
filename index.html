@@ -51,6 +51,11 @@
   <div class="types-list">
     <ul>
   
+  <li class=" " data-id="pundit/ApplicationPolicy" data-name="applicationpolicy(t)">
+      <a href="ApplicationPolicy.html">ApplicationPolicy</a>
+      
+    </li>
+  
   <li class="parent " data-id="pundit/Pundit" data-name="pundit">
       <a href="Pundit.html">Pundit</a>
       
@@ -58,6 +63,16 @@
   
   <li class=" " data-id="pundit/Pundit/ActionHelpers" data-name="pundit::actionhelpers">
       <a href="Pundit/ActionHelpers.html">ActionHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="pundit/Pundit/Error" data-name="pundit::error">
+      <a href="Pundit/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="pundit/Pundit/NotAuthorizedError" data-name="pundit::notauthorizederror">
+      <a href="Pundit/NotAuthorizedError.html">NotAuthorizedError</a>
       
     </li>
   
@@ -85,29 +100,152 @@
 
 <p>A simple Crystal shard for managing authorization in <a href="https://luckyframework.org" target="_blank">Lucky</a> applications. Intended to mimic the excellent Ruby <a href="https://github.com/varvet/pundit" target="_blank">Pundit</a> gem.</p>
 
-<h2><a id="installation" class="anchor" href="#installation">
+<h2><a id="lucky-installation" class="anchor" href="#lucky-installation">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Installation</h2>
+</a>Lucky Installation</h2>
 
 <ol><li>Add the dependency to your <code>shard.yml</code>:</li></ol>
 
-<pre><code class="language-yaml">dependencies:
-  pundit:
-    github: stephendolan/pundit</code></pre>
+<p><code></code>`yaml
+   # shard.yml
+   dependencies:</p>
+
+<pre><code> pundit:
+   github: stephendolan<span class="s">/pundit</span></code></pre>
+
+<p><code></code>`</p>
 
 <ol><li>Run <code>shards install</code></li></ol>
 
-<h2><a id="usage" class="anchor" href="#usage">
+<ol><li>Require the shard in your Lucky application</li></ol>
+
+<p><code></code>`crystal
+   # shards.cr
+   require "pundit"
+   <code></code>`</p>
+
+<ol><li>Require a new directory for policy definitions</li></ol>
+
+<p><code></code>`crystal
+   # app.cr
+   require "./policies/**"
+   <code></code>`</p>
+
+<h2><a id="usage-in-lucky" class="anchor" href="#usage-in-lucky">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Usage</h2>
+</a>Usage in Lucky</h2>
 
-<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;pundit&quot;</span></code></pre>
+<h3><a id="creating-policies" class="anchor" href="#creating-policies">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Creating policies</h3>
 
-<p><span class="flag orange">TODO</span>  Write usage instructions here</p>
+<p>Your policies must inherit from the provided <a href="src/pundit/application_policy.cr" target="_blank"><code>ApplicationPolicy(T)</code></a> abstract class, where <code>T</code> is the model you are authorizing against.</p>
+
+<p>For example, a <code>BookPolicy</code> may look like this:</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">BookPolicy</span> <span class="o">&lt;</span> <span class="t">ApplicationPolicy</span>(<span class="t">Book</span>)
+  <span class="k">def</span> <span class="m">index?</span>
+    <span class="n">true</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>The following methods are provided in <a href="src/pundit/application_policy.cr" target="_blank"><code>ApplicationPolicy</code></a>:</p>
+
+<p>| Method Name | Default Value |
+| ----------- | ------------- |
+| <code>index?</code>    | <code>false</code>       |
+| <code>show?</code>     | <code>false</code>       |
+| <code>create?</code>   | <code>false</code>       |
+| <code>new?</code>      | <code>create?</code>     |
+| <code>update?</code>   | <code>false</code>       |
+| <code>edit?</code>     | <code>update?</code>     |
+| <code>delete?</code>   | <code>false</code>       |</p>
+
+<h3><a id="authorizing-actions" class="anchor" href="#authorizing-actions">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Authorizing actions</h3>
+
+<p>Let's say we have a <code>Books::Index</code> action that looks like this:</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">Books</span><span class="t">::</span><span class="t">Index</span> <span class="o">&lt;</span> <span class="t">BrowserAction</span>
+  get <span class="s">&quot;/books/index&quot;</span> <span class="k">do</span>
+    html <span class="t">IndexPage</span>, books: <span class="t">BookQuery</span>.<span class="k">new</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>To use Pundit for authorization, simply add an <code>authorize</code> call:</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">Books</span><span class="t">::</span><span class="t">Index</span> <span class="o">&lt;</span> <span class="t">BrowserAction</span>
+  get <span class="s">&quot;/books/index&quot;</span> <span class="k">do</span>
+    authorize
+
+    html <span class="t">IndexPage</span>, books: <span class="t">BookQuery</span>.<span class="k">new</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>Behind the scenes, this is using the action's class name to check whether the <code>BookPolicy</code>'s <code>index?</code> method is permitted for <code>current_user</code>. If the call fails, a <code><a href="Pundit/NotAuthorizedError.html">Pundit::NotAuthorizedError</a></code> is raised with a <code>401</code> HTTP status.</p>
+
+<p>The <code>authorize</code> call above is identical to writing this:</p>
+
+<pre><code class="language-crystal"><span class="t">BookPolicy</span>.<span class="k">new</span>(current_user).index? || raise <span class="t">Pundit</span><span class="t">::</span><span class="t">NotAuthorizedError</span>.<span class="k">new</span></code></pre>
+
+<p>You can also leverage specific records in your authorization. For example, say we have a <code>Books::Update</code> action that looks like this:</p>
+
+<pre><code class="language-crystal">post <span class="s">&quot;/books/:book_id/update&quot;</span> <span class="k">do</span>
+  book <span class="o">=</span> <span class="t">BookQuery</span>.find(book_id)
+
+  <span class="t">SaveBook</span>.update(book, params) <span class="k">do</span> <span class="o">|</span>operation, book<span class="o">|</span>
+    redirect <span class="t">Home</span><span class="t">::</span><span class="t">Index</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>We can add an <code>authorize</code> call to check whether or not the user is permitted to update this specific book like this:</p>
+
+<pre><code class="language-crystal">post <span class="s">&quot;/books/:book_id/update&quot;</span> <span class="k">do</span>
+  book <span class="o">=</span> <span class="t">BookQuery</span>.find(book_id)
+
+  authorize(book)
+
+  <span class="t">SaveBook</span>.update(book, params) <span class="k">do</span> <span class="o">|</span>operation, book<span class="o">|</span>
+    redirect <span class="t">Home</span><span class="t">::</span><span class="t">Index</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<h3><a id="authorizing-views" class="anchor" href="#authorizing-views">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Authorizing views</h3>
+
+<p>Say we have a button to create a new book:</p>
+
+<pre><code class="language-crystal"><span class="k">def</span> <span class="m">render</span>
+  button <span class="s">&quot;Create new book&quot;</span>
+<span class="k">end</span></code></pre>
+
+<p>To ensure that the <code>current_user</code> is permitted to create a new book before showing the button, we can wrap the button in a policy check:</p>
+
+<pre><code class="language-crystal"><span class="k">def</span> <span class="m">render</span>
+  <span class="k">if</span> <span class="t">BookPolicy</span>.<span class="k">new</span>(current_user).create?
+    button <span class="s">&quot;Create new book&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<h3><a id="overriding-defaults" class="anchor" href="#overriding-defaults">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Overriding defaults</h3>
+
+<p><span class="flag orange">TODO</span>  Need to document a Lucky task or something to generate the default ApplicationPolicy, and explain how to override</p>
 
 <h2><a id="contributing" class="anchor" href="#contributing">
   <svg class="octicon-link" aria-hidden="true">

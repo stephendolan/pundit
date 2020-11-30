@@ -51,6 +51,11 @@
   <div class="types-list">
     <ul>
   
+  <li class=" " data-id="pundit/ApplicationPolicy" data-name="applicationpolicy(t)">
+      <a href="../ApplicationPolicy.html">ApplicationPolicy</a>
+      
+    </li>
+  
   <li class="parent open current" data-id="pundit/Pundit" data-name="pundit">
       <a href="../Pundit.html">Pundit</a>
       
@@ -58,6 +63,16 @@
   
   <li class=" current" data-id="pundit/Pundit/ActionHelpers" data-name="pundit::actionhelpers">
       <a href="../Pundit/ActionHelpers.html">ActionHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="pundit/Pundit/Error" data-name="pundit::error">
+      <a href="../Pundit/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="pundit/Pundit/NotAuthorizedError" data-name="pundit::notauthorizederror">
+      <a href="../Pundit/NotAuthorizedError.html">NotAuthorizedError</a>
       
     </li>
   
@@ -106,7 +121,7 @@
   </h2>
   
     
-      <a href="https://github.com/stephendolan/pundit/blob/f11fb556377e280aab2a5972e219b39921d1c8c0/src/pundit/action_helpers.cr#L1" target="_blank">
+      <a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/action_helpers.cr#L1" target="_blank">
         pundit/action_helpers.cr
       </a>
     
@@ -134,6 +149,8 @@
       <li class="entry-summary">
         <a href="#current_user:T?-instance-method" class="signature"><strong>#current_user</strong> : T?</a>
         
+          <div class="summary"><p>We need to leverage the <code><a href="../Pundit/ActionHelpers.html#current_user:T?-instance-method">#current_user</a></code> method for implicit authorization checks</p></div>
+        
       </li>
     
   </ul>
@@ -151,7 +168,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#authorize(policy_class_override=nil,method_name_override=nil)-macro" class="signature"><strong>authorize</strong>(policy_class_override = <span class="n">nil</span>, method_name_override = <span class="n">nil</span>)</a>
+        <a href="#authorize(object=nil,policy_class_override=nil,method_name_override=nil)-macro" class="signature"><strong>authorize</strong>(object = <span class="n">nil</span>, policy_class_override = <span class="n">nil</span>, method_name_override = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -185,10 +202,15 @@
         <a class="method-permalink" href="#current_user:T?-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>We need to leverage the <code><a href="../Pundit/ActionHelpers.html#current_user:T?-instance-method">#current_user</a></code> method for implicit authorization checks</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/f11fb556377e280aab2a5972e219b39921d1c8c0/src/pundit/action_helpers.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/action_helpers.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -205,18 +227,18 @@
     Macro Detail
   </h2>
   
-    <div class="entry-detail" id="authorize(policy_class_override=nil,method_name_override=nil)-macro">
+    <div class="entry-detail" id="authorize(object=nil,policy_class_override=nil,method_name_override=nil)-macro">
       <div class="signature">
         
-        macro <strong>authorize</strong>(policy_class_override = <span class="n">nil</span>, method_name_override = <span class="n">nil</span>)
+        macro <strong>authorize</strong>(object = <span class="n">nil</span>, policy_class_override = <span class="n">nil</span>, method_name_override = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#authorize(policy_class_override=nil,method_name_override=nil)-macro">#</a>
+        <a class="method-permalink" href="#authorize(object=nil,policy_class_override=nil,method_name_override=nil)-macro">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/f11fb556377e280aab2a5972e219b39921d1c8c0/src/pundit/action_helpers.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/action_helpers.cr#L2" target="_blank">View source</a>]
         
       </div>
     </div>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="crystal_docs.project_version" content="main">
+<meta name="crystal_docs.project_name" content="pundit">
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="pundit">
+  <title>ApplicationPolicy(T) - pundit main</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          pundit
+        </a>
+      </h1>
+
+      <span class="project-version">
+        main
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" current" data-id="pundit/ApplicationPolicy" data-name="applicationpolicy(t)">
+      <a href="ApplicationPolicy.html">ApplicationPolicy</a>
+      
+    </li>
+  
+  <li class="parent " data-id="pundit/Pundit" data-name="pundit">
+      <a href="Pundit.html">Pundit</a>
+      
+        <ul>
+  
+  <li class=" " data-id="pundit/Pundit/ActionHelpers" data-name="pundit::actionhelpers">
+      <a href="Pundit/ActionHelpers.html">ActionHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="pundit/Pundit/Error" data-name="pundit::error">
+      <a href="Pundit/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="pundit/Pundit/NotAuthorizedError" data-name="pundit::notauthorizederror">
+      <a href="Pundit/NotAuthorizedError.html">NotAuthorizedError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">abstract class</span> ApplicationPolicy(T)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="ApplicationPolicy.html">ApplicationPolicy(T)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L1" target="_blank">
+        pundit/application_policy.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(user:User,record:T?=nil)-class-method" class="signature"><strong>.new</strong>(user : User, record : T? = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#create?-instance-method" class="signature"><strong>#create?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete?-instance-method" class="signature"><strong>#delete?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#edit?-instance-method" class="signature"><strong>#edit?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#index?-instance-method" class="signature"><strong>#index?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new?-instance-method" class="signature"><strong>#new?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#record-instance-method" class="signature"><strong>#record</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#show?-instance-method" class="signature"><strong>#show?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#update?-instance-method" class="signature"><strong>#update?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#user-instance-method" class="signature"><strong>#user</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(user:User,record:T?=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(user : User, record : T? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new(user:User,record:T?=nil)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="create?-instance-method">
+      <div class="signature">
+        
+        def <strong>create?</strong>
+
+        <a class="method-permalink" href="#create?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete?-instance-method">
+      <div class="signature">
+        
+        def <strong>delete?</strong>
+
+        <a class="method-permalink" href="#delete?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="edit?-instance-method">
+      <div class="signature">
+        
+        def <strong>edit?</strong>
+
+        <a class="method-permalink" href="#edit?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="index?-instance-method">
+      <div class="signature">
+        
+        def <strong>index?</strong>
+
+        <a class="method-permalink" href="#index?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new?-instance-method">
+      <div class="signature">
+        
+        def <strong>new?</strong>
+
+        <a class="method-permalink" href="#new?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L20" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="record-instance-method">
+      <div class="signature">
+        
+        def <strong>record</strong>
+
+        <a class="method-permalink" href="#record-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L3" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="show?-instance-method">
+      <div class="signature">
+        
+        def <strong>show?</strong>
+
+        <a class="method-permalink" href="#show?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="update?-instance-method">
+      <div class="signature">
+        
+        def <strong>update?</strong>
+
+        <a class="method-permalink" href="#update?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="user-instance-method">
+      <div class="signature">
+        
+        def <strong>user</strong>
+
+        <a class="method-permalink" href="#user-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/application_policy.cr#L2" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

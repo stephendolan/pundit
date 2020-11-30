@@ -8,8 +8,8 @@
 <meta name="crystal_docs.project_name" content="pundit">
 
 
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/doc.js"></script>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
 
 <svg class="hidden">
   <symbol id="octicon-link" viewBox="0 0 16 16">
@@ -18,9 +18,9 @@
 </svg>
 
   <meta id="repository-name" content="pundit">
-  <title>Pundit - pundit main</title>
+  <title>Pundit::NotAuthorizedError - pundit main</title>
   <script type="text/javascript">
-    CrystalDocs.base_path = "";
+    CrystalDocs.base_path = "../";
   </script>
 </head>
 <body>
@@ -33,7 +33,7 @@
 
     <div class="project-summary">
       <h1 class="project-name">
-        <a href="index.html">
+        <a href="../index.html">
           pundit
         </a>
       </h1>
@@ -52,27 +52,27 @@
     <ul>
   
   <li class=" " data-id="pundit/ApplicationPolicy" data-name="applicationpolicy(t)">
-      <a href="ApplicationPolicy.html">ApplicationPolicy</a>
+      <a href="../ApplicationPolicy.html">ApplicationPolicy</a>
       
     </li>
   
   <li class="parent open current" data-id="pundit/Pundit" data-name="pundit">
-      <a href="Pundit.html">Pundit</a>
+      <a href="../Pundit.html">Pundit</a>
       
         <ul>
   
   <li class=" " data-id="pundit/Pundit/ActionHelpers" data-name="pundit::actionhelpers">
-      <a href="Pundit/ActionHelpers.html">ActionHelpers</a>
+      <a href="../Pundit/ActionHelpers.html">ActionHelpers</a>
       
     </li>
   
   <li class=" " data-id="pundit/Pundit/Error" data-name="pundit::error">
-      <a href="Pundit/Error.html">Error</a>
+      <a href="../Pundit/Error.html">Error</a>
       
     </li>
   
-  <li class=" " data-id="pundit/Pundit/NotAuthorizedError" data-name="pundit::notauthorizederror">
-      <a href="Pundit/NotAuthorizedError.html">NotAuthorizedError</a>
+  <li class=" current" data-id="pundit/Pundit/NotAuthorizedError" data-name="pundit::notauthorizederror">
+      <a href="../Pundit/NotAuthorizedError.html">NotAuthorizedError</a>
       
     </li>
   
@@ -90,24 +90,15 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Pundit
+  <span class="kind">class</span> Pundit::NotAuthorizedError
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Pundit/NotAuthorizedError.html">Pundit::NotAuthorizedError</a></li><li class="superclass"><a href="../Pundit/Error.html">Pundit::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
-  <h2>
-    <a id="overview" class="anchor" href="#overview">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Overview
-  </h2>
-
-  <p>Module for handling authorization</p>
 
 
 
@@ -132,73 +123,29 @@
   </h2>
   
     
-      <a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit.cr#L4" target="_blank">
-        pundit.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/action_helpers.cr#L1" target="_blank">
-        pundit/action_helpers.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/errors.cr#L1" target="_blank">
+      <a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/errors.cr#L5" target="_blank">
         pundit/errors.cr
       </a>
     
     <br/>
   
-    
-      <a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/version.cr#L1" target="_blank">
-        pundit/version.cr
-      </a>
-    
-    <br/>
-  
-
-
-
-  
-    <h2>
-      <a id="constant-summary" class="anchor" href="#constant-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-      Constant Summary
-    </h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="VERSION">
-        <strong>VERSION</strong> = <code><span class="s">&quot;0.1.0&quot;</span></code>
-      </dt>
-      
-    
-  </dl>
-
-
 
 
 
 
 
   <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+    <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Instance Method Summary
+    Constructors
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#do_something-instance-method" class="signature"><strong>#do_something</strong></a>
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
         
       </li>
     
@@ -208,40 +155,84 @@
 
 
 
+
+
+
+
 <div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
   
 </div>
 
 
-
-
-
-
   <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Instance Method Detail
+    Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="do_something-instance-method">
+    <div class="entry-detail" id="new-class-method">
       <div class="signature">
         
-        def <strong>do_something</strong>
+        def self.<strong>new</strong>
 
-        <a class="method-permalink" href="#do_something-instance-method">#</a>
+        <a class="method-permalink" href="#new-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/version.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/6726dd928b11d94de2b7cc1ca44fe231019cc0bf/src/pundit/errors.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
   
+
+
+
+
 
 
 
