@@ -40,3 +40,8 @@ TODO: Write development instructions here
 ## Contributors
 
 - [Stephen Dolan](https://github.com/stephendolan) - creator and maintainer
+
+## Inspiration
+
+- The [Pundit](https://github.com/varvet/pundit) Ruby gem was what formed my need as a programmer for this kind of simple approach to authorization
+- The [Praetorian](https://github.com/ilanusse/praetorian) Crystal shard took an excellent first step towards proving out the Pundit model in Crystal
