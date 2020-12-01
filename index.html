@@ -191,7 +191,7 @@
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
 
-<p>Behind the scenes, this is using the action's class name to check whether the <code>BookPolicy</code>'s <code>index?</code> method is permitted for <code>current_user</code>. If the call fails, a <code><a href="Pundit/NotAuthorizedError.html">Pundit::NotAuthorizedError</a></code> is raised with a <code>401</code> HTTP status.</p>
+<p>Behind the scenes, this is using the action's class name to check whether the <code>BookPolicy</code>'s <code>index?</code> method is permitted for <code>current_user</code>. If the call fails, a <code><a href="Pundit/NotAuthorizedError.html">Pundit::NotAuthorizedError</a></code> is raised.</p>
 
 <p>The <code>authorize</code> call above is identical to writing this:</p>
 
