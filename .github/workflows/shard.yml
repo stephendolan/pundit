@@ -16,6 +16,7 @@ jobs:
           - crystallang/crystal:0.35.0-alpine
           - crystallang/crystal:0.35.1-alpine
           - crystallang/crystal:latest-alpine
+          - crystallang/crystal:nightly-alpine
 
     runs-on: ubuntu-latest
 
