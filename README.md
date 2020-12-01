@@ -85,7 +85,7 @@ class Books::Index < BrowserAction
 end
 ```
 
-Behind the scenes, this is using the action's class name to check whether the `BookPolicy`'s `index?` method is permitted for `current_user`. If the call fails, a `Pundit::NotAuthorizedError` is raised with a `401` HTTP status.
+Behind the scenes, this is using the action's class name to check whether the `BookPolicy`'s `index?` method is permitted for `current_user`. If the call fails, a `Pundit::NotAuthorizedError` is raised.
 
 The `authorize` call above is identical to writing this:
 
