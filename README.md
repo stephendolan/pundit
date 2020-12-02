@@ -49,7 +49,7 @@ A simple Crystal shard for managing authorization in [Lucky](https://luckyframew
    include Pundit::ActionHelpers(User)
    ```
 
-1. Run the initializer to create your `ApplicationPolicy`:
+1. Run the initializer to create your `ApplicationPolicy` if you don't want [the default](src/pundit/application_policy.cr):
 
    ```sh
    lucky pundit.init
