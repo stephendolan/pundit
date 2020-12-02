@@ -6,6 +6,8 @@
 
 A simple Crystal shard for managing authorization in [Lucky](https://luckyframework.org) applications. Intended to mimic the excellent Ruby [Pundit](https://github.com/varvet/pundit) gem.
 
+**This library should not be used in production, as it is still actively undergoing API changes and is largely untested**
+
 ## Lucky Installation
 
 1. Add the dependency to your `shard.yml`:
