@@ -1,4 +1,4 @@
-module Pundit::ActionHelpers
+module Pundit::ActionHelpers(T)
   macro authorize(object = nil, policy = nil, query = nil)
     # Split up the calling class to make it easier to work with
     {% caller_class_array = @type.stringify.split("::") %}

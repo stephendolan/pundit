@@ -35,7 +35,14 @@ A simple Crystal shard for managing authorization in [Lucky](https://luckyframew
    require "./policies/**"
    ```
 
-## Usage in Lucky
+1. Include the `Pundit::ActionHelpers` module in `BrowserAction`:
+
+   ```crystal
+   # src/actions/browser_action.cr
+   include Pundit::ActionHelpers(User)
+   ```
+
+## Usage
 
 ### Creating policies
 
