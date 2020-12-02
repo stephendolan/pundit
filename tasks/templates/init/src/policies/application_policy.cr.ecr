@@ -1,9 +1,9 @@
 abstract class ApplicationPolicy(T)
-  getter user
+  getter <%= @user_model.underscore %>
   getter record
 
-  # Swap out `User` for your user class, if needed!
-  def initialize(@user : User?, @record : T? = nil)
+  # Swap out `<%= @user_model %>` for your user class, if needed!
+  def initialize(@<%= @user_model.underscore %> : <%= @user_model %>?, @record : T? = nil)
   end
 
   def index?

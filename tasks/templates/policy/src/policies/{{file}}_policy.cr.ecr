@@ -1,0 +1,21 @@
+class <%= @policy_model %>Policy < ApplicationPolicy(<%= @policy_model %>)
+  def index?
+    false
+  end
+
+  def show?
+    false
+  end
+
+  def create?
+    false
+  end
+
+  def update?
+    false
+  end
+
+  def delete?
+    false
+  end
+end

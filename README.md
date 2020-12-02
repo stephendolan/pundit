@@ -28,6 +28,13 @@ A simple Crystal shard for managing authorization in [Lucky](https://luckyframew
    require "pundit"
    ```
 
+1. Require the tasks in your Lucky application
+
+   ```crystal
+   # tasks.cr
+   require "pundit/tasks/**"
+   ```
+
 1. Require a new directory for policy definitions
 
    ```crystal
@@ -42,18 +49,42 @@ A simple Crystal shard for managing authorization in [Lucky](https://luckyframew
    include Pundit::ActionHelpers(User)
    ```
 
+1. Run the initializer to create your `ApplicationPolicy`:
+
+   ```sh
+   lucky pundit.init
+   ```
+
 ## Usage
 
 ### Creating policies
 
+The easiest way to create new policies is to use the built-in Lucky task! After following the steps in the Installation section, simply run `lucky gen.policy Book`, for example, to create a new `BookPolicy` in your application.
+
 Your policies must inherit from the provided [`ApplicationPolicy(T)`](src/pundit/application_policy.cr) abstract class, where `T` is the model you are authorizing against.
 
-For example, a `BookPolicy` may look like this:
+For example, the `BookPolicy` we created with `lucky gen.policy Book` looks like this:
 
 ```crystal
 class BookPolicy < ApplicationPolicy(Book)
   def index?
-    true
+    false
+  end
+
+  def show?
+    false
+  end
+
+  def create?
+    false
+  end
+
+  def update?
+    false
+  end
+
+  def delete?
+    false
   end
 end
 ```
@@ -148,9 +179,28 @@ def render
 end
 ```
 
-### Overriding defaults
+### Overriding the User model
 
-TODO: Need to document a Lucky task or something to generate the default ApplicationPolicy, and explain how to override
+If your application doesn't return an instance of `User` from your `current_user` method, you'll need to make the following updates (we're using `Account` as an example):
+
+- Run `lucky pundit.init --user-model {Account}`, or modify your `ApplicationPolicy`'s `initialize` content like this:
+
+  ```crystal
+  abstract class ApplicationPolicy(T)
+    getter account
+    getter record
+
+    def initialize(@account : Account?, @record : T? = nil)
+    end
+  end
+  ```
+
+- Update the `include` of the `Pundit::ActionHelpers` module in `BrowserAction`:
+
+  ```crystal
+  # src/actions/browser_action.cr
+  include Pundit::ActionHelpers(Account)
+  ```
 
 ### Handling authorization errors
 
