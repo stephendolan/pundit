@@ -128,6 +128,13 @@
    require "pundit"
    <code></code>`</p>
 
+<ol><li>Require the tasks in your Lucky application</li></ol>
+
+<p><code></code>`crystal
+   # tasks.cr
+   require "pundit/tasks/**"
+   <code></code>`</p>
+
 <ol><li>Require a new directory for policy definitions</li></ol>
 
 <p><code></code>`crystal
@@ -142,6 +149,12 @@
    include Pundit::ActionHelpers(User)
    <code></code>`</p>
 
+<ol><li>Run the initializer to create your <code><a href="ApplicationPolicy.html">ApplicationPolicy</a></code>:</li></ol>
+
+<p><code></code>`sh
+   lucky pundit.init
+   <code></code>`</p>
+
 <h2><a id="usage" class="anchor" href="#usage">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -154,13 +167,31 @@
   </svg>
 </a>Creating policies</h3>
 
+<p>The easiest way to create new policies is to use the built-in Lucky task! After following the steps in the Installation section, simply run <code>lucky gen.policy Book</code>, for example, to create a new <code>BookPolicy</code> in your application.</p>
+
 <p>Your policies must inherit from the provided <a href="src/pundit/application_policy.cr" target="_blank"><code>ApplicationPolicy(T)</code></a> abstract class, where <code>T</code> is the model you are authorizing against.</p>
 
-<p>For example, a <code>BookPolicy</code> may look like this:</p>
+<p>For example, the <code>BookPolicy</code> we created with <code>lucky gen.policy Book</code> looks like this:</p>
 
 <pre><code class="language-crystal"><span class="k">class</span> <span class="t">BookPolicy</span> <span class="o">&lt;</span> <span class="t">ApplicationPolicy</span>(<span class="t">Book</span>)
   <span class="k">def</span> <span class="m">index?</span>
-    <span class="n">true</span>
+    <span class="n">false</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">show?</span>
+    <span class="n">false</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">create?</span>
+    <span class="n">false</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">update?</span>
+    <span class="n">false</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">delete?</span>
+    <span class="n">false</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
 
@@ -248,13 +279,34 @@
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
 
-<h3><a id="overriding-defaults" class="anchor" href="#overriding-defaults">
+<h3><a id="overriding-the-user-model" class="anchor" href="#overriding-the-user-model">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Overriding defaults</h3>
+</a>Overriding the User model</h3>
 
-<p><span class="flag orange">TODO</span>  Need to document a Lucky task or something to generate the default ApplicationPolicy, and explain how to override</p>
+<p>If your application doesn't return an instance of <code>User</code> from your <code>current_user</code> method, you'll need to make the following updates (we're using <code>Account</code> as an example):</p>
+
+<ul><li>Run <code>lucky pundit.init --user-model {Account}</code>, or modify your <code><a href="ApplicationPolicy.html">ApplicationPolicy</a></code>'s <code>initialize</code> content like this:</li></ul>
+
+<p><code></code>`crystal
+  abstract class ApplicationPolicy(T)</p>
+
+<pre><code>getter account
+getter record
+
+<span class="k">def</span> <span class="m">initialize</span>(@account : <span class="t">Account</span>?, @record : <span class="t">T</span>? <span class="o">=</span> <span class="n">nil</span>)
+<span class="k">end</span></code></pre>
+
+<p>end
+  <code></code>`</p>
+
+<ul><li>Update the <code>include</code> of the <code><a href="Pundit/ActionHelpers.html">Pundit::ActionHelpers</a></code> module in <code>BrowserAction</code>:</li></ul>
+
+<p><code></code>`crystal
+  # src/actions/browser_action.cr
+  include Pundit::ActionHelpers(Account)
+  <code></code>`</p>
 
 <h3><a id="handling-authorization-errors" class="anchor" href="#handling-authorization-errors">
   <svg class="octicon-link" aria-hidden="true">
