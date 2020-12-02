@@ -61,7 +61,7 @@
       
         <ul>
   
-  <li class=" " data-id="pundit/Pundit/ActionHelpers" data-name="pundit::actionhelpers">
+  <li class=" " data-id="pundit/Pundit/ActionHelpers" data-name="pundit::actionhelpers(t)">
       <a href="Pundit/ActionHelpers.html">ActionHelpers</a>
       
     </li>
@@ -135,11 +135,18 @@
    require "./policies/**"
    <code></code>`</p>
 
-<h2><a id="usage-in-lucky" class="anchor" href="#usage-in-lucky">
+<ol><li>Include the <code><a href="Pundit/ActionHelpers.html">Pundit::ActionHelpers</a></code> module in <code>BrowserAction</code>:</li></ol>
+
+<p><code></code>`crystal
+   # src/actions/browser_action.cr
+   include Pundit::ActionHelpers(User)
+   <code></code>`</p>
+
+<h2><a id="usage" class="anchor" href="#usage">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Usage in Lucky</h2>
+</a>Usage</h2>
 
 <h3><a id="creating-policies" class="anchor" href="#creating-policies">
   <svg class="octicon-link" aria-hidden="true">
