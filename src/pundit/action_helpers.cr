@@ -1,5 +1,5 @@
 module Pundit::ActionHelpers
-  macro authorize(object = nil, policy_class_override = nil, method_name_override = nil)
+  macro authorize(object = nil, policy = nil, query = nil)
     # Split up the calling class to make it easier to work with
     {% caller_class_array = @type.stringify.split("::") %}
 
@@ -16,8 +16,8 @@ module Pundit::ActionHelpers
     policy_class = {{ caller_class_base_singular.id }}Policy
 
     # Accept the override if a policy class has been manually provied
-    {% if policy_class_override %}
-      policy_class = {{ policy_class_override }}
+    {% if policy %}
+      policy_class = {{ policy }}
     {% end %}
 
     # Pluck the action from the calling class and turn it into a policy method.
@@ -25,8 +25,8 @@ module Pundit::ActionHelpers
     {% method_name = (caller_class_array.last.underscore + "?").id %}
 
     # Accept the override if a policy method has been manually provied
-    {% if method_name_override %}
-      {% method_name = method_name_override.id %}
+    {% if query %}
+      {% method_name = query.id %}
     {% end %}
 
     # Finally, call the policy method.
