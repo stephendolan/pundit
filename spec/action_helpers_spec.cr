@@ -4,42 +4,17 @@ class Book; end
 
 class User; end
 
-class AlwaysPassPolicy < ApplicationPolicy(Book)
-  def index?
+class OverridePolicy < ApplicationPolicy(Book)
+  def pass?
     true
   end
 
-  def show?
-    true
+  def fail?
+    false
   end
-
-  def create?
-    true
-  end
-
-  def update?
-    true
-  end
-
-  def delete?
-    true
-  end
-end
-
-class AlwaysFailPolicy < ApplicationPolicy(Book)
 end
 
 class BookPolicy < ApplicationPolicy(Book)
-  def initialize(@user, @record); end
-
-  def index?
-    true
-  end
-
-  def create?
-    true
-  end
-
   def pass?
     true
   end
@@ -57,64 +32,43 @@ class ActionMock
   end
 end
 
-class Books::Index < ActionMock
-  def action(book = nil)
-    authorize
+macro define_mock_action(pass_or_fail)
+  class Books::{{ pass_or_fail }} < ActionMock
+    def action_no_args
+      authorize
+    end
+
+    def action_with_object(book)
+      authorize(object: book)
+    end
+
+    def action_with_policy(policy)
+      authorize(policy: policy)
+    end
+
+    def action_with_query_string
+      authorize(query: "#{{{ pass_or_fail.stringify.underscore }}}?")
+    end
+
+    def action_with_query_symbol
+      authorize(query: :{{ pass_or_fail.stringify.underscore.id }}?)
+    end
   end
 end
 
-class Books::Show < ActionMock
-  def action(book = nil)
-    authorize
-  end
-end
-
-class Books::Update < ActionMock
-  def action(policy = nil)
-    authorize(policy: policy)
-  end
-end
-
-class Books::Create < ActionMock
-  def action(book = nil)
-    authorize(book)
-  end
-end
-
-class Books::StringQueryFail < ActionMock
-  def action
-    authorize(query: "fail?")
-  end
-end
-
-class Books::StringQueryPass < ActionMock
-  def action
-    authorize(query: "pass?")
-  end
-end
-
-class Books::SymbolQueryFail < ActionMock
-  def action
-    authorize(query: :fail?)
-  end
-end
-
-class Books::SymbolQueryPass < ActionMock
-  def action
-    authorize(query: :pass?)
-  end
-end
+define_mock_action(Pass)
+define_mock_action(Fail)
 
 describe Pundit::ActionHelpers do
   describe "#authorize" do
     describe "passing nothing" do
       it "returns true when authorization passes" do
-        Books::Index.new.action.should eq true
+        Books::Pass.new.action_no_args.should eq true
       end
 
       it "raises when authorization fails" do
         expect_raises Pundit::NotAuthorizedError do
-          Books::Show.new.action
+          Books::Fail.new.action_no_args
         end
       end
     end
@@ -122,25 +76,25 @@ describe Pundit::ActionHelpers do
     describe "passing an object" do
       it "returns the object when authorization passes" do
         book = Book.new
-        Books::Create.new.action(book).should eq book
+        Books::Pass.new.action_with_object(book).should eq book
       end
 
       it "raises when authorization fails" do
         expect_raises Pundit::NotAuthorizedError do
           book = Book.new
-          Books::Show.new.action(book)
+          Books::Fail.new.action_with_object(book)
         end
       end
     end
 
     describe "passing a policy override" do
       it "returns true when authorization passes" do
-        Books::Update.new.action(AlwaysPassPolicy).should eq true
+        Books::Pass.new.action_with_policy(OverridePolicy).should eq true
       end
 
       it "raises when authorization fails" do
         expect_raises Pundit::NotAuthorizedError do
-          Books::Update.new.action(AlwaysFailPolicy)
+          Books::Fail.new.action_with_policy(OverridePolicy)
         end
       end
     end
@@ -148,24 +102,24 @@ describe Pundit::ActionHelpers do
     describe "passing a query override" do
       context "as a symbol" do
         it "returns true when authorization passes" do
-          Books::SymbolQueryPass.new.action.should eq true
+          Books::Pass.new.action_with_query_symbol.should eq true
         end
 
         it "raises when authorization fails" do
           expect_raises Pundit::NotAuthorizedError do
-            Books::SymbolQueryFail.new.action
+            Books::Fail.new.action_with_query_symbol
           end
         end
       end
 
       context "as a string" do
         it "returns true when authorization passes" do
-          Books::StringQueryPass.new.action.should eq true
+          Books::Pass.new.action_with_query_string.should eq true
         end
 
         it "raises when authorization fails" do
           expect_raises Pundit::NotAuthorizedError do
-            Books::StringQueryFail.new.action
+            Books::Fail.new.action_with_query_string
           end
         end
       end
