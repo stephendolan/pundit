@@ -1,5 +1,5 @@
 module Pundit
-  VERSION = "0.4.0"
+  VERSION = "0.5.0"
 
   def do_something
     puts "Doing something!"
