@@ -66,11 +66,6 @@
       
     </li>
   
-  <li class=" " data-id="pundit/Pundit/Error" data-name="pundit::error">
-      <a href="../Pundit/Error.html">Error</a>
-      
-    </li>
-  
   <li class=" " data-id="pundit/Pundit/NotAuthorizedError" data-name="pundit::notauthorizederror">
       <a href="../Pundit/NotAuthorizedError.html">NotAuthorizedError</a>
       
@@ -98,6 +93,17 @@
 
 
 
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>A set of helpers that can be included in your Lucky <code>BrowserAction</code> and made available to all child actions.</p>
+
 
 
 
@@ -121,7 +127,7 @@
   </h2>
   
     
-      <a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/action_helpers.cr#L1" target="_blank">
+      <a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/action_helpers.cr#L2" target="_blank">
         pundit/action_helpers.cr
       </a>
     
@@ -149,7 +155,7 @@
       <li class="entry-summary">
         <a href="#current_user:T?-instance-method" class="signature"><strong>#current_user</strong> : T?</a>
         
-          <div class="summary"><p>We need to leverage the <code><a href="../Pundit/ActionHelpers.html#current_user:T?-instance-method">#current_user</a></code> method for implicit authorization checks</p></div>
+          <div class="summary"><p>Pundit needs to leverage the <code><a href="../Pundit/ActionHelpers.html#current_user:T?-instance-method">#current_user</a></code> method for implicit authorization checks</p></div>
         
       </li>
     
@@ -169,6 +175,8 @@
     
       <li class="entry-summary">
         <a href="#authorize(object=nil,policy=nil,query=nil)-macro" class="signature"><strong>authorize</strong>(object = <span class="n">nil</span>, policy = <span class="n">nil</span>, query = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>The <code><a href="../Pundit/ActionHelpers.html#authorize(object=nil,policy=nil,query=nil)-macro">authorize</a></code> method can be added to any action to determine whether or not the <code><a href="../Pundit/ActionHelpers.html#current_user:T?-instance-method">#current_user</a></code> can take that action.</p></div>
         
       </li>
     
@@ -204,13 +212,13 @@
       
         <div class="doc">
           
-          <p>We need to leverage the <code><a href="../Pundit/ActionHelpers.html#current_user:T?-instance-method">#current_user</a></code> method for implicit authorization checks</p>
+          <p>Pundit needs to leverage the <code><a href="../Pundit/ActionHelpers.html#current_user:T?-instance-method">#current_user</a></code> method for implicit authorization checks</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/action_helpers.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/action_helpers.cr#L60" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -235,10 +243,27 @@
         <a class="method-permalink" href="#authorize(object=nil,policy=nil,query=nil)-macro">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>The <code><a href="../Pundit/ActionHelpers.html#authorize(object=nil,policy=nil,query=nil)-macro">authorize</a></code> method can be added to any action to determine whether or not the <code><a href="../Pundit/ActionHelpers.html#current_user:T?-instance-method">#current_user</a></code> can take that action.</p>
+
+<p>In its simplest form, you don't have to provide any parameters:</p>
+
+<pre><code><span class="k">class</span> <span class="t">Books</span><span class="t">::</span><span class="t">Index</span> <span class="o">&lt;</span> <span class="t">BrowserAction</span>
+  get <span class="s">&quot;/books&quot;</span> <span class="k">do</span>
+    authorize
+
+    html <span class="t">Books</span><span class="t">::</span><span class="t">IndexPage</span>, books: <span class="t">BooksQuery</span>.<span class="k">new</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>This is equivalent to replacing <code><a href="../Pundit/ActionHelpers.html#authorize(object=nil,policy=nil,query=nil)-macro">authorize</a></code> with <code>BookPolicy.new(current_user).index? || raise <a href="../Pundit/NotAuthorizedError.html">Pundit::NotAuthorizedError</a></code></p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/action_helpers.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/action_helpers.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>

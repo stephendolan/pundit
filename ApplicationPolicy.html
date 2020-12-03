@@ -66,11 +66,6 @@
       
     </li>
   
-  <li class=" " data-id="pundit/Pundit/Error" data-name="pundit::error">
-      <a href="Pundit/Error.html">Error</a>
-      
-    </li>
-  
   <li class=" " data-id="pundit/Pundit/NotAuthorizedError" data-name="pundit::notauthorizederror">
       <a href="Pundit/NotAuthorizedError.html">NotAuthorizedError</a>
       
@@ -100,6 +95,19 @@
 
 
 
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>The default Pundit policy that all other policies should inherit from.</p>
+
+<p>Should you with to update the default policy definitions, run <code>lucky pundit.init</code> and override where needed.</p>
+
 
 
 
@@ -123,7 +131,7 @@
   </h2>
   
     
-      <a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L1" target="_blank">
+      <a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L4" target="_blank">
         pundit/application_policy.cr
       </a>
     
@@ -147,7 +155,7 @@
       <li class="entry-summary">
         <a href="#new(user:User?,record:T?=nil)-class-method" class="signature"><strong>.new</strong>(user : User?, record : T? = <span class="n">nil</span>)</a>
         
-          <div class="summary"><p>Swap out <code>User</code> for your user class, if needed!</p></div>
+          <div class="summary"><p>A policy takes in a user that might be nil, as well as an object that may be nil.</p></div>
         
       </li>
     
@@ -170,25 +178,35 @@
       <li class="entry-summary">
         <a href="#create?-instance-method" class="signature"><strong>#create?</strong></a>
         
+          <div class="summary"><p>Whether or not the <code>Create</code> action can be accessed</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#delete?-instance-method" class="signature"><strong>#delete?</strong></a>
+        
+          <div class="summary"><p>Whether or not the <code>Delete</code> action can be accessed</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#edit?-instance-method" class="signature"><strong>#edit?</strong></a>
         
+          <div class="summary"><p>Whether or not the <code>Edit</code> action can be accessed</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#index?-instance-method" class="signature"><strong>#index?</strong></a>
         
+          <div class="summary"><p>Whether or not the <code>Index</code> action can be accessed</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#new?-instance-method" class="signature"><strong>#new?</strong></a>
+        
+          <div class="summary"><p>Whether or not the <code>New</code> action can be accessed</p></div>
         
       </li>
     
@@ -200,10 +218,14 @@
       <li class="entry-summary">
         <a href="#show?-instance-method" class="signature"><strong>#show?</strong></a>
         
+          <div class="summary"><p>Whether or not the <code>Show</code> action can be accessed</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#update?-instance-method" class="signature"><strong>#update?</strong></a>
+        
+          <div class="summary"><p>Whether or not the <code>Update</code> action can be accessed</p></div>
         
       </li>
     
@@ -262,13 +284,15 @@
       
         <div class="doc">
           
-          <p>Swap out <code>User</code> for your user class, if needed!</p>
+          <p>A policy takes in a user that might be nil, as well as an object that may be nil.</p>
+
+<p>These are available in all policy check methods for access.</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -295,10 +319,15 @@
         <a class="method-permalink" href="#create?-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Whether or not the <code>Create</code> action can be accessed</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -311,10 +340,15 @@
         <a class="method-permalink" href="#delete?-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Whether or not the <code>Delete</code> action can be accessed</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L33" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -327,10 +361,15 @@
         <a class="method-permalink" href="#edit?-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Whether or not the <code>Edit</code> action can be accessed</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -343,10 +382,15 @@
         <a class="method-permalink" href="#index?-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Whether or not the <code>Index</code> action can be accessed</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -359,10 +403,15 @@
         <a class="method-permalink" href="#new?-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Whether or not the <code>New</code> action can be accessed</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -378,7 +427,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -391,10 +440,15 @@
         <a class="method-permalink" href="#show?-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Whether or not the <code>Show</code> action can be accessed</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -407,10 +461,15 @@
         <a class="method-permalink" href="#update?-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Whether or not the <code>Update</code> action can be accessed</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -426,7 +485,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/stephendolan/pundit/blob/e6edb06614e1dba7b311971d00c8ec301582482d/src/pundit/application_policy.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/stephendolan/pundit/blob/de81d73248325c94e4e663202d6b422b8c1f715d/src/pundit/application_policy.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
