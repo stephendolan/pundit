@@ -1,4 +1,20 @@
+# A set of helpers that can be included in your Lucky `BrowserAction` and made available to all child actions.
 module Pundit::ActionHelpers(T)
+  # The `authorize` method can be added to any action to determine whether or not the `current_user` can take that action.
+  #
+  # In its simplest form, you don't have to provide any parameters:
+  #
+  # ```
+  # class Books::Index < BrowserAction
+  #   get "/books" do
+  #     authorize
+  #
+  #     html Books::IndexPage, books: BooksQuery.new
+  #   end
+  # end
+  # ```
+  #
+  # This is equivalent to replacing `authorize` with `BookPolicy.new(current_user).index? || raise Pundit::NotAuthorizedError`
   macro authorize(object = nil, policy = nil, query = nil)
     # Split up the calling class to make it easier to work with
     {% caller_class_array = @type.stringify.split("::") %}
@@ -40,6 +56,6 @@ module Pundit::ActionHelpers(T)
     end
   end
 
-  # We need to leverage the `current_user` method for implicit authorization checks
+  # Pundit needs to leverage the `current_user` method for implicit authorization checks
   abstract def current_user : T?
 end
