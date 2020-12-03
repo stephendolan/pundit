@@ -31,7 +31,13 @@ module Pundit::ActionHelpers(T)
 
     # Finally, call the policy method.
     # For `authorize` within `Store::Books::Index`, this calls `Store::BookPolicy.new(current_user, nil).index?`
-    policy_class.new(current_user, {{ object }}).{{ method_name }} || raise Pundit::NotAuthorizedError.new
+    is_authorized = policy_class.new(current_user, {{ object }}).{{ method_name }}
+
+    if is_authorized
+      {{ object }} || is_authorized
+    else
+      raise Pundit::NotAuthorizedError.new
+    end
   end
 
   # We need to leverage the `current_user` method for implicit authorization checks
