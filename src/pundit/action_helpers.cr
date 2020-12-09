@@ -28,12 +28,12 @@ module Pundit::ActionHelpers(T)
     {% caller_class_base_singular = run("./run_macros/singularize.cr", caller_class_base_plural) %}
 
     # Finally, turn that base class into a policy.
-    # For `Store::Book`, this yields `Store::BookPolicy`
-    policy_class = {{ caller_class_base_singular.id }}Policy
-
-    # Accept the override if a policy class has been manually provied
-    {% if policy %}
-      policy_class = {{ policy }}
+    # For `Store::Book`, this yields `Store::BookPolicy`.
+    # Accepts an override if a policy class has been manually provied
+    policy_class = {% if policy %}
+      {{ policy }}
+    {% else %}
+      {{ caller_class_base_singular.id }}Policy
     {% end %}
 
     # Pluck the action from the calling class and turn it into a policy method.
