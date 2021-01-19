@@ -42,9 +42,9 @@ jobs:
             ~/.cache/crystal
             bin/ameba
             lib
-          key: ${{ runner.os }}-crystal-${{ matrix.image_tag }}-${{ hashFiles('**/shard.lock') }}
+          key: ${{ runner.os }}-crystal-${{ matrix.crystal_version }}-${{ hashFiles('**/shard.lock') }}
           restore-keys: |
-            ${{ runner.os }}-crystal-${{ matrix.image_tag }}
+            ${{ runner.os }}-crystal-${{ matrix.crystal_version }}
 
       - name: Install shards
         if: steps.crystal-cache.outputs.cache-hit != 'true'
