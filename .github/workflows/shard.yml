@@ -13,12 +13,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        image_tag:
+          - 0.34.0-alpine
+          - 0.35.1-alpine
+          - latest-alpine
         experimental: [false]
         include:
-          - image_tag: 0.34.0-alpine
-          - image_tag: 0.35.0-alpine
-          - image_tag: 0.35.1-alpine
-          - image_tag: latest-alpine
           - image_tag: nightly-alpine
             experimental: true
 
