@@ -27,6 +27,8 @@ jobs:
     container: crystallang/crystal:${{ matrix.image_tag }}
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Check format
         run: crystal tool format --check
 
