@@ -7,24 +7,26 @@ on:
   pull_request:
     branches:
       - "*"
+  schedule:
+    - cron: "0 3 * * MON"
 
 jobs:
   LintAndTest:
     strategy:
       fail-fast: false
       matrix:
-        image_tag:
+        crystal_version:
           - 0.34.0
           - 0.35.1
           - latest
         experimental: [false]
         include:
-          - image_tag: nightly
+          - crystal_version: nightly
             experimental: true
 
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
-    container: crystallang/crystal:${{ matrix.image_tag }}-alpine
+    container: crystallang/crystal:${{ matrix.crystal_version }}-alpine
 
     steps:
       - uses: actions/checkout@v2
