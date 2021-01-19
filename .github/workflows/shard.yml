@@ -14,17 +14,17 @@ jobs:
       fail-fast: false
       matrix:
         image_tag:
-          - 0.34.0-alpine
-          - 0.35.1-alpine
-          - latest-alpine
+          - 0.34.0
+          - 0.35.1
+          - latest
         experimental: [false]
         include:
-          - image_tag: nightly-alpine
+          - image_tag: nightly
             experimental: true
 
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
-    container: crystallang/crystal:${{ matrix.image_tag }}
+    container: crystallang/crystal:${{ matrix.image_tag }}-alpine
 
     steps:
       - uses: actions/checkout@v2
