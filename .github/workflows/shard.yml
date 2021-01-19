@@ -11,6 +11,7 @@ on:
 jobs:
   LintAndTest:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - image_tag: 0.34.0-alpine
@@ -21,9 +22,7 @@ jobs:
             experimental: true
 
     runs-on: ubuntu-latest
-
     continue-on-error: ${{ matrix.experimental }}
-
     container: crystallang/crystal:${{ matrix.image_tag }}
 
     steps:
