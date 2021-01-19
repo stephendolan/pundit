@@ -30,10 +30,24 @@ jobs:
       - name: Check format
         run: crystal tool format --check
 
+      - name: Set up Crystal cache
+        uses: actions/cache@v2
+        id: crystal-cache
+        with:
+          path: |
+            ~/.cache/crystal
+            bin/ameba
+            lib
+          key: ${{ runner.os }}-crystal-${{ matrix.image_tag }}-${{ hashFiles('**/shard.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-crystal-${{ matrix.image_tag }}
+
+      - name: Install shards
+        if: steps.crystal-cache.outputs.cache-hit != 'true'
+        run: shards check || shards install
+
       - name: Crystal Ameba Linter
-        uses: crystal-ameba/github-action@v0.2.7
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./bin/ameba
 
       - name: Run tests
         run: crystal spec
