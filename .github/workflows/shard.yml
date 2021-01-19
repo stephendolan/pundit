@@ -12,15 +12,19 @@ jobs:
   LintAndTest:
     strategy:
       matrix:
-        container:
-          - crystallang/crystal:0.35.0-alpine
-          - crystallang/crystal:0.35.1-alpine
-          - crystallang/crystal:latest-alpine
-          - crystallang/crystal:nightly-alpine
+        include:
+          - image_tag: 0.34.0-alpine
+          - image_tag: 0.35.0-alpine
+          - image_tag: 0.35.1-alpine
+          - image_tag: latest-alpine
+          - image_tag: nightly-alpine
+            experimental: true
 
     runs-on: ubuntu-latest
 
-    container: ${{ matrix.container }}
+    continue-on-error: ${{ matrix.experimental }}
+
+    container: crystallang/crystal:${{ matrix.image_tag }}
 
     steps:
       - name: Check format
