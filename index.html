@@ -3,21 +3,16 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="generator" content="Crystal Docs 0.35.1">
 <meta name="crystal_docs.project_version" content="main">
 <meta name="crystal_docs.project_name" content="pundit">
+
 
 
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/doc.js"></script>
 
-<svg class="hidden">
-  <symbol id="octicon-link" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
-  </symbol>
-</svg>
-
-  <meta id="repository-name" content="pundit">
+  <meta name="repository-name" content="pundit">
   <title>pundit main</title>
   <script type="text/javascript">
   CrystalDocs.base_path = "";
@@ -25,6 +20,11 @@
 </head>
 <body>
 
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <div class="search-results" class="hidden">
+  <div class="search-results hidden">
     <ul class="search-list"></ul>
   </div>
 
@@ -90,10 +90,10 @@
 </a>Pundit</h1>
 
 <p><img src="https://github.com/stephendolan/pundit/workflows/Shard%20CI/badge.svg" alt="Shard CI"/>
-<a href="https://stephendolan.github.io/pundit" target="_blank"><img src="https://img.shields.io/website?down_color=red&down_message=Offline&label=API%20Documentation&up_message=Online&url=https%3A%2F%2Fstephendolan.github.io%2Fpundit%2F" alt="API Documentation Website"/></a>
-<a href="https://github.com/stephendolan/pundit/releases" target="_blank"><img src="https://img.shields.io/github/release/stephendolan/pundit.svg?label=Release" alt="GitHub release"/></a></p>
+<a href="https://stephendolan.github.io/pundit"><img src="https://img.shields.io/website?down_color=red&down_message=Offline&label=API%20Documentation&up_message=Online&url=https%3A%2F%2Fstephendolan.github.io%2Fpundit%2F" alt="API Documentation Website"/></a>
+<a href="https://github.com/stephendolan/pundit/releases"><img src="https://img.shields.io/github/release/stephendolan/pundit.svg?label=Release" alt="GitHub release"/></a></p>
 
-<p>A simple Crystal shard for managing authorization in <a href="https://luckyframework.org" target="_blank">Lucky</a> applications. Intended to mimic the excellent Ruby <a href="https://github.com/varvet/pundit" target="_blank">Pundit</a> gem.</p>
+<p>A simple Crystal shard for managing authorization in <a href="https://luckyframework.org">Lucky</a> applications. Intended to mimic the excellent Ruby <a href="https://github.com/varvet/pundit">Pundit</a> gem.</p>
 
 <h2><a id="lucky-installation" class="anchor" href="#lucky-installation">
   <svg class="octicon-link" aria-hidden="true">
@@ -107,8 +107,8 @@
    # shard.yml
    dependencies:</p>
 
-<pre><code> pundit:
-   github: stephendolan<span class="s">/pundit</span></code></pre>
+<pre><code class="language-crystal"> pundit:
+   github: stephendolan/pundit</code></pre>
 
 <p><code></code>`</p>
 
@@ -142,7 +142,7 @@
    include Pundit::ActionHelpers(User)
    <code></code>`</p>
 
-<ol><li>Run the initializer to create your <code><a href="ApplicationPolicy.html">ApplicationPolicy</a></code> if you don't want <a href="src/pundit/application_policy.cr" target="_blank">the default</a>:</li></ol>
+<ol><li>Run the initializer to create your <code><a href="ApplicationPolicy.html">ApplicationPolicy</a></code> if you don't want <a href="src/pundit/application_policy.cr">the default</a>:</li></ol>
 
 <p><code></code>`sh
    lucky pundit.init
@@ -162,7 +162,7 @@
 
 <p>The easiest way to create new policies is to use the built-in Lucky task! After following the steps in the Installation section, simply run <code>lucky gen.policy Book</code>, for example, to create a new <code>BookPolicy</code> in your application.</p>
 
-<p>Your policies must inherit from the provided <a href="src/pundit/application_policy.cr" target="_blank"><code>ApplicationPolicy(T)</code></a> abstract class, where <code>T</code> is the model you are authorizing against.</p>
+<p>Your policies must inherit from the provided <a href="src/pundit/application_policy.cr"><code>ApplicationPolicy(T)</code></a> abstract class, where <code>T</code> is the model you are authorizing against.</p>
 
 <p>For example, the <code>BookPolicy</code> we created with <code>lucky gen.policy Book</code> looks like this:</p>
 
@@ -188,7 +188,7 @@
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
 
-<p>The following methods are provided in <a href="src/pundit/application_policy.cr" target="_blank"><code>ApplicationPolicy</code></a>:</p>
+<p>The following methods are provided in <a href="src/pundit/application_policy.cr"><code>ApplicationPolicy</code></a>:</p>
 
 <p>| Method Name | Default Value |
 | ----------- | ------------- |
@@ -285,7 +285,7 @@
 <p><code></code>`crystal
   abstract class ApplicationPolicy(T)</p>
 
-<pre><code>getter account
+<pre><code class="language-crystal">getter account
 getter record
 
 <span class="k">def</span> <span class="m">initialize</span>(@account : <span class="t">Account</span>?, @record : <span class="t">T</span>? <span class="o">=</span> <span class="n">nil</span>)
@@ -346,7 +346,7 @@ getter record
   </svg>
 </a>Contributors</h2>
 
-<ul><li><a href="https://github.com/stephendolan" target="_blank">Stephen Dolan</a> - creator and maintainer</li></ul>
+<ul><li><a href="https://github.com/stephendolan">Stephen Dolan</a> - creator and maintainer</li></ul>
 
 <h2><a id="inspiration" class="anchor" href="#inspiration">
   <svg class="octicon-link" aria-hidden="true">
@@ -354,7 +354,7 @@ getter record
   </svg>
 </a>Inspiration</h2>
 
-<ul><li>The <a href="https://github.com/varvet/pundit" target="_blank">Pundit</a> Ruby gem was what formed my need as a programmer for this kind of simple approach to authorization</li><li>The <a href="https://github.com/ilanusse/praetorian" target="_blank">Praetorian</a> Crystal shard took an excellent first step towards proving out the Pundit model in Crystal</li></ul>
+<ul><li>The <a href="https://github.com/varvet/pundit">Pundit</a> Ruby gem was what formed my need as a programmer for this kind of simple approach to authorization</li><li>The <a href="https://github.com/ilanusse/praetorian">Praetorian</a> Crystal shard took an excellent first step towards proving out the Pundit model in Crystal</li></ul>
 </div>
 </body>
 </html>
