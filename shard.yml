@@ -1,11 +1,11 @@
 name: pundit
 description: A simple authorization library for Lucky Crystal apps
-version: 0.7.1
+version: 0.8.0
 
 authors:
   - Stephen Dolan <stephen@luckycasts.com>
 
-crystal: 0.35.1
+crystal: 0.36.1
 
 license: MIT
 
