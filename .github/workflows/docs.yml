@@ -18,7 +18,7 @@ jobs:
           persist-credentials: false
 
       - name: "Install shards"
-        run: shards install
+        run: shards install --ignore-crystal-version
 
       - name: "Generate docs"
         run: crystal docs
