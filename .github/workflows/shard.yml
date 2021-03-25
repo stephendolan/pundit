@@ -47,7 +47,7 @@ jobs:
 
       - name: Install shards
         if: steps.crystal-cache.outputs.cache-hit != 'true'
-        run: shards check || shards install
+        run: shards check || shards install --ignore-crystal-version
 
       - name: Crystal Ameba Linter
         run: ./bin/ameba
