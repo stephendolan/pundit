@@ -1,4 +1,4 @@
-require "lucky_cli"
+require "lucky_task"
 
 class Pundit::InitTemplate < Teeplate::FileTree
   directory "#{__DIR__}/templates/init"
@@ -9,7 +9,7 @@ class Pundit::InitTemplate < Teeplate::FileTree
   end
 end
 
-class Pundit::Init < LuckyCli::Task
+class Pundit::Init < LuckyTask::Task
   summary "Generate the default ApplicationPolicy for Pundit"
   name "pundit.init"
 

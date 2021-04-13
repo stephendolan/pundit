@@ -1,4 +1,4 @@
-require "lucky_cli"
+require "lucky_task"
 
 class Pundit::GeneratePolicyTemplate < Teeplate::FileTree
   directory "#{__DIR__}/templates/policy"
@@ -11,7 +11,7 @@ class Pundit::GeneratePolicyTemplate < Teeplate::FileTree
   end
 end
 
-class Pundit::GeneratePolicy < LuckyCli::Task
+class Pundit::GeneratePolicy < LuckyTask::Task
   summary "Generate a Pundit policy for a model or resource"
   name "gen.policy"
 
