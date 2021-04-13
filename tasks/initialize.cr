@@ -1,4 +1,5 @@
 require "lucky_task"
+require "teeplate"
 
 class Pundit::InitTemplate < Teeplate::FileTree
   directory "#{__DIR__}/templates/init"

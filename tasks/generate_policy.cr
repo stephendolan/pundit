@@ -1,4 +1,5 @@
 require "lucky_task"
+require "teeplate"
 
 class Pundit::GeneratePolicyTemplate < Teeplate::FileTree
   directory "#{__DIR__}/templates/policy"

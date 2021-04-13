@@ -13,6 +13,9 @@ dependencies:
   wordsmith:
     github: luckyframework/wordsmith
     version: ~> 0.2
+  teeplate:
+    github: luckyframework/teeplate
+    version: ~> 0.8.3
 
 development_dependencies:
   ameba:
