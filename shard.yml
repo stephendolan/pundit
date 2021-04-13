@@ -1,6 +1,6 @@
 name: pundit
 description: A simple authorization library for Lucky Crystal apps
-version: 0.9.0
+version: 0.10.0
 
 authors:
   - Stephen Dolan <stephen@luckycasts.com>
@@ -15,7 +15,7 @@ dependencies:
     version: ~> 0.2
   teeplate:
     github: luckyframework/teeplate
-    version: ~> 0.8.3
+    version: ~> 0.8
 
 development_dependencies:
   ameba:
