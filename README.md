@@ -47,6 +47,19 @@ A simple Crystal shard for managing authorization in [Lucky](https://luckyframew
    include Pundit::ActionHelpers(User)
    ```
 
+1. (Optional) Capture `Pundit` exceptions in `src/actions/errors/show.cr` with a new `#render` override:
+
+   ```crystal
+   # Capture Pundit authorization exceptions to handle it elegantly
+   def render(error : Pundit::NotAuthorizedError)
+     if html?
+       error_html "Sorry, you're not authorized to access that", status: 401
+     else
+       error_json "Not authorized", status: 401
+     end
+   end
+   ```
+
 1. Run the initializer to create your `ApplicationPolicy` if you don't want [the default](src/pundit/application_policy.cr):
 
    ```sh
