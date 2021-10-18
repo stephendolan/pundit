@@ -27,7 +27,7 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
 
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
 
       - uses: oprypin/install-crystal@v1
         with:
