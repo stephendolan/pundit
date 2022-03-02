@@ -1,14 +1,13 @@
-name: Auto-merge minor/patch
+name: Auto-merge
+
 on:
-  schedule:
-    - cron: "0 * * * *"
+  workflow_dispatch:
+  workflow_run:
+    types:
+      - completed
+    workflows:
+      - 'Shard CI'
+
 jobs:
-  test:
-    name: Auto-merge minor and patch updates
-    runs-on: ubuntu-latest
-    steps:
-      - uses: koj-co/dependabot-pr-action@master
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          merge-minor: true
-          merge-patch: true
+  automerge:
+    uses: stephendolan/lucky_jumpstart/.github/workflows/automerge.yml@v1.0.0
