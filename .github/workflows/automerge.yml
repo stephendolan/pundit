@@ -10,4 +10,4 @@ on:
 
 jobs:
   automerge:
-    uses: stephendolan/lucky_jumpstart/.github/workflows/automerge.yml@v1.0.0
+    uses: stephendolan/lucky_jumpstart/.github/workflows/automerge.yml@v1.1.0
