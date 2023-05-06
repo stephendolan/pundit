@@ -76,28 +76,35 @@ The easiest way to create new policies is to use the built-in Lucky task! After 
 
 Your policies must inherit from the provided [`ApplicationPolicy(T)`](src/pundit/application_policy.cr) abstract class, where `T` is the model you are authorizing against.
 
-For example, the `BookPolicy` we created with `lucky gen.policy Book` looks like this:
+For example, the `BookPolicy` we created with `lucky gen.policy Book` might look like this:
 
 ```crystal
 class BookPolicy < ApplicationPolicy(Book)
   def index?
-    false
+    # If you want to either allow or deny all visitors, simply return `true` or `false`
+    true
   end
 
   def show?
-    false
+    # You can reference other methods if you want to share authorization between them
+    update?
   end
 
   def create?
-    false
+    # Only signed-in users can create books
+    return false unless signed_in_user = user
   end
 
   def update?
-    false
+    # Only the owner of a book can update it
+    return false unless requested_book = record
+    
+    requested_book.owner == user
   end
 
   def delete?
-    false
+    # You can reference other methods if you want to share authorization between them
+    update?
   end
 end
 ```
