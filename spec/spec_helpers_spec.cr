@@ -1,12 +1,7 @@
 require "./spec_helper"
 require "../src/pundit/spec_helpers"
 
-class TestUser; end
-
 class TestRecord; end
-
-# Define User type alias for the tests
-alias User = TestUser
 
 class TestRecordPolicy < ApplicationPolicy(TestRecord)
   def show?

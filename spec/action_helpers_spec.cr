@@ -2,8 +2,6 @@ require "./spec_helper"
 
 class Book; end
 
-class User; end
-
 class OverridePolicy < ApplicationPolicy(Book)
   def pass?
     true
@@ -28,7 +26,7 @@ class ActionMock
   include Pundit::ActionHelpers(User)
 
   def current_user : User
-    User.new
+    TestUser.new
   end
 end
 
