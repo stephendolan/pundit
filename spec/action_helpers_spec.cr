@@ -2,8 +2,6 @@ require "./spec_helper"
 
 class Book; end
 
-class User; end
-
 class OverridePolicy < ApplicationPolicy(Book)
   def pass?
     true
@@ -28,7 +26,7 @@ class ActionMock
   include Pundit::ActionHelpers(User)
 
   def current_user : User
-    User.new
+    TestUser.new
   end
 end
 
@@ -63,7 +61,7 @@ describe Pundit::ActionHelpers do
   describe "#authorize" do
     describe "passing nothing" do
       it "returns true when authorization passes" do
-        Books::Pass.new.action_no_args.should eq true
+        Books::Pass.new.action_no_args.should be_true
       end
 
       it "raises when authorization fails" do
@@ -89,7 +87,7 @@ describe Pundit::ActionHelpers do
 
     describe "passing a policy override" do
       it "returns true when authorization passes" do
-        Books::Pass.new.action_with_policy(OverridePolicy).should eq true
+        Books::Pass.new.action_with_policy(OverridePolicy).should be_true
       end
 
       it "raises when authorization fails" do
@@ -102,7 +100,7 @@ describe Pundit::ActionHelpers do
     describe "passing a query override" do
       context "as a symbol" do
         it "returns true when authorization passes" do
-          Books::Pass.new.action_with_query_symbol.should eq true
+          Books::Pass.new.action_with_query_symbol.should be_true
         end
 
         it "raises when authorization fails" do
@@ -114,7 +112,7 @@ describe Pundit::ActionHelpers do
 
       context "as a string" do
         it "returns true when authorization passes" do
-          Books::Pass.new.action_with_query_string.should eq true
+          Books::Pass.new.action_with_query_string.should be_true
         end
 
         it "raises when authorization fails" do

@@ -18,4 +18,35 @@ class <%= @policy_model %>Policy < ApplicationPolicy(<%= @policy_model %>)
   def delete?
     false
   end
+
+  # Define which attributes can be set by the user
+  # Used with permitted_attributes helper in actions
+  #
+  # Example:
+  # def permitted_attributes
+  #   if user.admin?
+  #     [:title, :body, :published, :author_id]
+  #   else
+  #     [:title, :body]
+  #   end
+  # end
+  #
+  # You can also define action-specific permitted attributes:
+  # def permitted_attributes_for_update
+  #   [:title, :body]
+  # end
+
+  # Example scope for filtering collections
+  class Scope < ApplicationPolicy::Scope
+    def resolve
+      # Example: scope.where(published: true)
+      # Or for user-specific filtering:
+      # if user
+      #   scope.where(user_id: user.id)
+      # else
+      #   scope.none
+      # end
+      scope
+    end
+  end
 end

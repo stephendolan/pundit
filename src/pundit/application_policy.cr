@@ -1,7 +1,11 @@
 # The default Pundit policy that all other policies should inherit from.
 #
 # Should you with to update the default policy definitions, run `lucky pundit.init` and override where needed.
+# NOTE: This expects a User type to be defined in your application
 abstract class ApplicationPolicy(T)
+  @user : User?
+  @record : T?
+
   getter user
   getter record
 
@@ -9,6 +13,22 @@ abstract class ApplicationPolicy(T)
   #
   # These are available in all policy check methods for access.
   def initialize(@user : User?, @record : T? = nil)
+  end
+
+  # Base scope class that can be overridden in each policy
+  abstract class Scope
+    getter user
+    getter scope
+
+    def initialize(@user, @scope)
+    end
+
+    abstract def resolve
+  end
+
+  # Override this method in your policy to implement scoping
+  def self.scope
+    Scope
   end
 
   # Whether or not the `Index` action can be accessed
