@@ -106,6 +106,33 @@ class BookPolicy < ApplicationPolicy(Book)
     # You can reference other methods if you want to share authorization between them
     update?
   end
+
+  # Define permitted attributes for mass assignment
+  def permitted_attributes
+    if user.try(&.admin?)
+      [:title, :body, :published, :author_id]
+    else
+      [:title, :body]
+    end
+  end
+
+  # You can also define action-specific permitted attributes
+  def permitted_attributes_for_update
+    [:title, :body]
+  end
+
+  # Policy Scope for filtering collections
+  class Scope < ApplicationPolicy::Scope
+    def resolve
+      if user
+        # Show only user's books or published books
+        scope.where(user_id: user.id).or(&.where(published: true))
+      else
+        # Show only published books to visitors
+        scope.where(published: true)
+      end
+    end
+  end
 end
 ```
 
@@ -179,6 +206,109 @@ post "/books/:book_id/update" do
 end
 ```
 
+### Using Policy Scopes
+
+Policy scopes allow you to filter collections based on what the user is allowed to see:
+
+```crystal
+class Books::Index < BrowserAction
+  get "/books" do
+    # Use policy scope to filter books
+    books = policy_scope(Book, BookQuery.new)
+    
+    html IndexPage, books: books
+  end
+end
+```
+
+### Headless Policies
+
+For actions that don't relate to a specific model, you can use headless policies:
+
+```crystal
+# Define a headless policy
+class DashboardPolicy < ApplicationPolicy(Nil)
+  def show?
+    user != nil  # Only logged-in users can see dashboard
+  end
+end
+
+# Use in action
+class Dashboard::Show < BrowserAction
+  get "/dashboard" do
+    authorize(:dashboard)  # Uses DashboardPolicy
+    
+    html DashboardPage
+  end
+end
+```
+
+### Namespaced Policies
+
+For organizing policies under namespaces (e.g., admin policies):
+
+```crystal
+module Admin
+  class BookPolicy < ApplicationPolicy(Book)
+    def update?
+      user.try(&.admin?)
+    end
+  end
+end
+
+# Use in action
+class Admin::Books::Update < BrowserAction
+  post "/admin/books/:book_id" do
+    book = BookQuery.find(book_id)
+    authorize(object: book, policy: Admin::BookPolicy)
+    
+    # ... update logic
+  end
+end
+```
+
+### Permitted Attributes
+
+Control which attributes users can modify:
+
+```crystal
+class Books::Create < BrowserAction
+  post "/books" do
+    authorize
+    
+    # Get permitted attributes based on user permissions
+    book = Book.new
+    allowed_attrs = permitted_attributes(book)
+    
+    # Use with your operations, filtering params to only allowed attributes
+    SaveBook.create(params.select(allowed_attrs)) do |operation, book|
+      # ...
+    end
+  end
+end
+```
+
+### Ensuring Authorization
+
+Add verification hooks to ensure all actions are authorized:
+
+```crystal
+abstract class BrowserAction < Lucky::Action
+  include Pundit::ActionHelpers(User)
+  
+  after verify_authorized
+  after verify_policy_scoped  # If you want to ensure scopes are used
+  
+  # Skip verification for specific actions
+  def index
+    skip_authorization  # Skip verify_authorized check
+    skip_policy_scope   # Skip verify_policy_scoped check
+    
+    html PublicPage
+  end
+end
+```
+
 ### Authorizing views
 
 Say we have a button to create a new book:
@@ -195,6 +325,63 @@ To ensure that the `current_user` is permitted to create a new book before showi
 def render
   if BookPolicy.new(current_user).create?
     button "Create new book"
+  end
+end
+```
+
+### View Helpers
+
+For Lucky pages, include the `Pundit::PageHelpers` module to get convenient helper methods:
+
+```crystal
+# In your MainLayout or specific pages
+include Pundit::PageHelpers
+
+def render
+  # Using can? helper
+  if can?(edit?, book)
+    link "Edit", to: Books::Edit.with(book.id)
+  end
+  
+  # Using cannot? helper
+  if cannot?(delete?, book)
+    text "You cannot delete this book"
+  end
+  
+  # Using show_if_authorized
+  show_if_authorized(update?, book) do
+    link "Update", to: Books::Update.with(book.id)
+  end
+  
+  # Getting a policy instance
+  book_policy = policy(book)
+  if book_policy.publish?
+    button "Publish"
+  end
+end
+```
+
+### Policy Helpers in Actions
+
+Additional helper methods are available in actions:
+
+```crystal
+class Books::Show < BrowserAction
+  get "/books/:book_id" do
+    book = BookQuery.find(book_id)
+    
+    # Get policy instance
+    book_policy = policy(book)
+    
+    # Or enforce policy exists
+    book_policy = policy!(book)  # Raises if policy not found
+    
+    # Custom user object
+    def pundit_user
+      current_account  # Use custom method instead of current_user
+    end
+    
+    html ShowPage, book: book, policy: book_policy
   end
 end
 ```
@@ -221,6 +408,55 @@ If your application doesn't return an instance of `User` from your `current_user
   # src/actions/browser_action.cr
   include Pundit::ActionHelpers(Account)
   ```
+
+### Testing Policies
+
+Pundit provides test helpers to make policy testing easier:
+
+```crystal
+require "spec"
+require "pundit/spec_helpers"
+
+include Pundit::SpecHelpers
+
+describe BookPolicy do
+  it "allows admin to update any book" do
+    admin = User.new(admin: true)
+    book = Book.new
+    
+    assert_permit(BookPolicy, admin, book, update?)
+  end
+  
+  it "prevents regular users from deleting books" do
+    user = User.new(admin: false)
+    book = Book.new
+    
+    assert_forbid(BookPolicy, user, book, delete?)
+  end
+  
+  # Using the test macros
+  describe_policy(BookPolicy) do
+    let(:admin) { User.new(admin: true) }
+    let(:user) { User.new(admin: false) }
+    let(:book) { Book.new }
+    
+    it "allows admins all actions" do
+      policy = policy_for(admin, book)
+      
+      policy.update?.should be_true
+      policy.delete?.should be_true
+    end
+  end
+  
+  # Test permitted attributes
+  it "limits attributes for regular users" do
+    user = User.new(admin: false)
+    policy = BookPolicy.new(user, Book.new)
+    
+    policy.permitted_attributes.should eq([:title, :body])
+  end
+end
+```
 
 ### Handling authorization errors
 
@@ -250,6 +486,11 @@ class Errors::Show < Lucky::ErrorAction
   end
 end
 ```
+
+The error object includes additional context when available:
+- `error.policy` - The policy class that was checked
+- `error.query` - The method that was called (e.g., "update?")
+- `error.record` - The record that was being authorized
 
 ## Contributing
 

@@ -6,6 +6,17 @@ abstract class ApplicationPolicy(T)
   def initialize(@<%= @user_model.underscore %> : <%= @user_model %>?, @record : T? = nil)
   end
 
+  # Base scope class for collection filtering
+  abstract class Scope
+    getter <%= @user_model.underscore %> : <%= @user_model %>?
+    getter scope
+
+    def initialize(@<%= @user_model.underscore %> : <%= @user_model %>?, @scope)
+    end
+
+    abstract def resolve
+  end
+
   def index?
     false
   end
